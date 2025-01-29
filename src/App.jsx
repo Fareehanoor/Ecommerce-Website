@@ -7,6 +7,7 @@ import ErrorPage from "./components/ErrorPage";
 import { GlobalStyle } from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import Header from "./views/Header";
+import Cart from "./components/Cart";
 
 function App() {
   const theme = {
@@ -43,6 +44,7 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="about" element={<About />} />
             <Route path="products" element={<Products />} />
+            <Route path="cart" element={<Cart />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </BrowserRouter>

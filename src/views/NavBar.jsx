@@ -1,33 +1,75 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { IoCartOutline } from "react-icons/io5";
+import { CgClose, CgMenu } from "react-icons/cg";
+import { useState } from "react";
 
 const NavBar = () => {
+  const [menuIcon, setMenuIcon] = useState(false);
   return (
     <>
       <Nav>
-        <div className="navbar">
+        <div className={menuIcon ? "navbar active" : "navbar"}>
           <ul className="navbar-lists">
             <li>
-              <NavLink className="navbar-link" to="/">
+              <NavLink
+                className="navbar-link"
+                to="/"
+                onClick={() => setMenuIcon(false)}
+              >
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink className="navbar-link" to="/about">
+              <NavLink
+                className="navbar-link"
+                to="/about"
+                onClick={() => setMenuIcon(false)}
+              >
                 About
               </NavLink>
             </li>
             <li>
-              <NavLink className="navbar-link" to="/contact">
+              <NavLink
+                className="navbar-link"
+                to="/contact"
+                onClick={() => setMenuIcon(false)}
+              >
                 Contact
               </NavLink>
             </li>
             <li>
-              <NavLink className="navbar-link" to="/products">
+              <NavLink
+                className="navbar-link"
+                to="/products"
+                onClick={() => setMenuIcon(false)}
+              >
                 Products
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                className="navbar-link cart-trolley--link"
+                to="/cart"
+                onClick={() => setMenuIcon(false)}
+              >
+                <IoCartOutline className="cart-trolley" />
+                <span className="cart-total--item">10</span>
+              </NavLink>
+            </li>
           </ul>
+          <div className="mobile-navbar-btn">
+            <CgMenu
+              name="menu-outline"
+              className="mobile-nav-icon"
+              onClick={() => setMenuIcon(true)}
+            />
+            <CgClose
+              name="close-outline"
+              className="mobile-nav-icon close-outline"
+              onClick={() => setMenuIcon(false)}
+            />
+          </div>
         </div>
       </Nav>
     </>
@@ -45,7 +87,7 @@ const Nav = styled.nav`
       &:visited {
         display: inline-block;
         text-decoration: none;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: 500;
         text-transform: uppercase;
         color: ${({ theme }) => theme.colors.black};
