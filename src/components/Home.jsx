@@ -1,15 +1,11 @@
-import styled from "styled-components";
+import HeroSection from "../views/HeroSection";
 
 const Home = () => {
-  return <Wrapper>home</Wrapper>;
-};
+  const data = {
+    name: "thapa store",
+  };
 
-const Wrapper = styled.section`
-  /* background-color: ${({ theme }) => theme.colors.bg}; */
-  /* background-color: aquamarine; */
-  /* width: 20rem; */
-  /* height: 20rem; */
-  height: 100vh;
-`;
+  return <HeroSection myData={data} />;
+};
 
 export default Home;

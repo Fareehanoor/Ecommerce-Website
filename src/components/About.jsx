@@ -1,5 +1,11 @@
+import HeroSection from "../views/HeroSection";
+
 const About = () => {
-  return <div>About</div>;
+  const data = {
+    name: "Thapa Ecommerce",
+  };
+
+  return <HeroSection myData={data} />;
 };
 
 export default About;
