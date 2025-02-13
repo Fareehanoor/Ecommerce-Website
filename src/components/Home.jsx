@@ -1,3 +1,4 @@
+import FeatureProducts from "../views/FeatureProducts";
 import HeroSection from "../views/HeroSection";
 import Services from "./Services";
 import Trusted from "./Trusted";
@@ -10,6 +11,7 @@ const Home = () => {
   return (
     <>
       <HeroSection myData={data} />
+      <FeatureProducts />
       <Services />
       <Trusted />
     </>

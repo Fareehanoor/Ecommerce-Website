@@ -9,6 +9,7 @@ import { ThemeProvider } from "styled-components";
 import Header from "./views/Header";
 import Cart from "./components/Cart";
 import Footer from "./views/Footer";
+import SingleProduct from "./components/SingleProduct";
 
 function App() {
   const theme = {
@@ -46,6 +47,7 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="about" element={<About />} />
             <Route path="products" element={<Products />} />
+            <Route path="/singleproduct/:id" element={<SingleProduct />} />
             <Route path="cart" element={<Cart />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
