@@ -24,6 +24,26 @@ const productReducer = (state, action) => {
       featuredProducts: featureData,
     };
   }
+  if (action.type === "single_page_loading") {
+    return {
+      isSinglePageLoading: true,
+      ...state,
+    };
+  }
+  if (action.type === "single_product") {
+    return {
+      singleProduct: action.payload,
+      isSinglePageLoading: false,
+      ...state,
+    };
+  }
+  if (action.type === "single_page_error") {
+    return {
+      isSinglePageLoading: false,
+      isError: true,
+      ...state,
+    };
+  }
   return state;
 };
 export default productReducer;

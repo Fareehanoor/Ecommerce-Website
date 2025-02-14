@@ -11,6 +11,8 @@ const initialState = {
   isError: false,
   products: [],
   featuredProducts: [],
+  isSinglePageLoading: false,
+  singleProduct: {},
 };
 
 export const AppProvider = ({ children }) => {
@@ -28,12 +30,26 @@ export const AppProvider = ({ children }) => {
       console.log(error);
     }
   };
+  // get single product
+  const getSingleProduct = async (url) => {
+    dispatch({ type: "single_page_loading" });
+    try {
+      const resposne = await axios.get(url);
+      const singleProduct = await resposne.data;
+      dispatch({ type: "single_product", payload: singleProduct });
+    } catch (error) {
+      dispatch({ type: "single_page_error" });
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getProducts(API);
   }, []);
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, getSingleProduct }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 //custom hook
