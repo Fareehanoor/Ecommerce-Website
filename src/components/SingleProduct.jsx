@@ -11,6 +11,7 @@ const SingleProduct = () => {
 
   console.log("singleProduct", singleProduct);
   console.log("isSinglePageLoading", isSinglePageLoading);
+  console.log("debug issue::", getSingleProduct);
 
   useEffect(() => {
     getSingleProduct(`${API_URL}?id=${id}`);
