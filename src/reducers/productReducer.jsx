@@ -26,22 +26,22 @@ const productReducer = (state, action) => {
   }
   if (action.type === "single_page_loading") {
     return {
-      isSinglePageLoading: true,
       ...state,
+      isSinglePageLoading: true,
     };
   }
   if (action.type === "single_product") {
     return {
-      singleProduct: action.payload,
-      isSinglePageLoading: false,
       ...state,
+      isSinglePageLoading: false,
+      singleProduct: action.payload,
     };
   }
   if (action.type === "single_page_error") {
     return {
+      ...state,
       isSinglePageLoading: false,
       isError: true,
-      ...state,
     };
   }
   return state;

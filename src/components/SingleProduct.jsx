@@ -11,13 +11,23 @@ const SingleProduct = () => {
 
   console.log("singleProduct", singleProduct);
   console.log("isSinglePageLoading", isSinglePageLoading);
-  console.log("debug issue::", getSingleProduct);
+
+  const {
+    id: alias,
+    name,
+    company,
+    price,
+    description,
+    category,
+    stock,
+    stars,
+  } = singleProduct;
 
   useEffect(() => {
     getSingleProduct(`${API_URL}?id=${id}`);
   }, []);
-
-  return <Wrapper>{id}</Wrapper>;
+  // return <h1>Product Page {name}</h1>;
+  return <Wrapper>{name}</Wrapper>;
 };
 const Wrapper = styled.section`
   .container {
