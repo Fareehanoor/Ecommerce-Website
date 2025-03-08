@@ -48,7 +48,7 @@ const SingleProduct = () => {
           <div className="product_images">
             <ProductImage image={image} />
           </div>
-          <div className="product_data">
+          <div className="product-data">
             <h2>{name}</h2>
             <p>{stars}</p>
             <p>{reviews} reviews</p>
@@ -110,6 +110,10 @@ const SingleProduct = () => {
 const Wrapper = styled.section`
   .container {
     padding: 9rem 0;
+  }
+  .product-images {
+    display: flex;
+    align-items: center;
   }
   .product-data {
     display: flex;
