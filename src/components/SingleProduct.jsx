@@ -12,6 +12,7 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { GiReceiveMoney } from "react-icons/gi";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import StarRatings from "./StarRatings";
+import AddToCart from "./AddToCart";
 
 const API_URL = "https://api.pujakaitem.com/api/products";
 const SingleProduct = () => {
@@ -95,13 +96,15 @@ const SingleProduct = () => {
                 Available:
                 <span>{stock > 0 ? "In stock" : "Out of Stock"}</span>
               </p>
-              <p>
+              {/* <p>
                 ID : <span>{id}</span>
-              </p>
+              </p> */}
               <p>
                 Brand : <span>{company}</span>
               </p>
             </div>
+            <hr />
+            {stock > 0 && <AddToCart product={singleProduct} />}
           </div>
         </div>
       </Container>
