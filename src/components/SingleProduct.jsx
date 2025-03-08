@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -10,6 +11,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlineSecurity } from "react-icons/md";
 import { GiReceiveMoney } from "react-icons/gi";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import StarRatings from "./StarRatings";
 
 const API_URL = "https://api.pujakaitem.com/api/products";
 const SingleProduct = () => {
@@ -50,8 +52,7 @@ const SingleProduct = () => {
           </div>
           <div className="product-data">
             <h2>{name}</h2>
-            <p>{stars}</p>
-            <p>{reviews} reviews</p>
+            <StarRatings stars={stars} reviews={reviews} />
             <p className="product-data-price">
               Before:
               <del>
