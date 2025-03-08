@@ -2,6 +2,14 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useProductContext } from "../context/products/productContext";
+import PageNavigation from "./PageNavigation";
+import ProductImage from "./ProductImage";
+import { Container } from "../styles/Container";
+import FormatPrice from "../helpers/FormatPrice";
+import { TbTruckDelivery } from "react-icons/tb";
+import { MdOutlineSecurity } from "react-icons/md";
+import { GiReceiveMoney } from "react-icons/gi";
+import { RiSecurePaymentLine } from "react-icons/ri";
 
 const API_URL = "https://api.pujakaitem.com/api/products";
 const SingleProduct = () => {
@@ -21,13 +29,83 @@ const SingleProduct = () => {
     category,
     stock,
     stars,
+    image,
+    reviews,
   } = singleProduct;
 
   useEffect(() => {
     getSingleProduct(`${API_URL}?id=${id}`);
   }, []);
-  // return <h1>Product Page {name}</h1>;
-  return <Wrapper>{name}</Wrapper>;
+
+  if (isSinglePageLoading) {
+    <div className="page_loading">Loading ...</div>;
+  }
+  return (
+    <Wrapper>
+      <PageNavigation title={name} />
+      <Container className="container">
+        <div className="grid grid-two-column">
+          <div className="product_images">
+            <ProductImage image={image} />
+          </div>
+          <div className="product_data">
+            <h2>{name}</h2>
+            <p>{stars}</p>
+            <p>{reviews} reviews</p>
+            <p className="product-data-price">
+              Before:
+              <del>
+                <FormatPrice price={price + 250000} />
+              </del>
+            </p>
+            <p className="product-data-price product-data-real-price">
+              Deal of the Day:
+              <FormatPrice price={price} />
+            </p>
+            <p>{description}</p>
+            <div className="product-data-warranty">
+              <div className="product-warranty-data">
+                <div>
+                  <TbTruckDelivery className="warranty-icon" />
+                  <p>free delivery</p>
+                </div>
+              </div>
+              <div className="product-warranty-data">
+                <div>
+                  <MdOutlineSecurity className="warranty-icon" />
+                  <p>Security</p>
+                </div>
+              </div>
+              <div className="product-warranty-data">
+                <div>
+                  <GiReceiveMoney className="warranty-icon" />
+                  <p>Gurrantee</p>
+                </div>
+              </div>
+              <div className="product-warranty-data">
+                <div>
+                  <RiSecurePaymentLine className="warranty-icon" />
+                  <p>Authentic</p>
+                </div>
+              </div>
+            </div>
+            <div className="product-data-info">
+              <p>
+                Available:
+                <span>{stock > 0 ? "In stock" : "Out of Stock"}</span>
+              </p>
+              <p>
+                ID : <span>{id}</span>
+              </p>
+              <p>
+                Brand : <span>{company}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </Wrapper>
+  );
 };
 const Wrapper = styled.section`
   .container {
