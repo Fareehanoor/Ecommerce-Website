@@ -1,11 +1,23 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa";
+import AmountCart from "./AmountCart";
+import { NavLink } from "react-router-dom";
+import { Button } from "./Button";
 
 /* eslint-disable react/prop-types */
 const AddToCart = ({ product }) => {
   const { id, colors, stock } = product;
   const [btnColor, setBtnColor] = useState(colors[0]);
+  const [amount, setAmount] = useState(1);
+
+  const setDecrement = () => {
+    amount > 1 ? setAmount(amount - 1) : setAmount(1);
+  };
+  const setIncrement = () => {
+    amount < stock ? setAmount(amount + 1) : setAmount(stock);
+  };
 
   return (
     <Wrapper>
@@ -30,6 +42,15 @@ const AddToCart = ({ product }) => {
           })}
         </p>
       </div>
+
+      <AmountCart
+        amount={amount}
+        decrement={setDecrement}
+        increment={setIncrement}
+      />
+      <NavLink to="/cart">
+        <Button className="btn">Add to Cart</Button>
+      </NavLink>
     </Wrapper>
   );
 };
