@@ -7,6 +7,12 @@ const filterReducer = (state, action) => {
       all_products: [...action.payload],
     };
   }
+  if (action.type === "set_grid_view") {
+    return {
+      ...state,
+      grid_view: true,
+    };
+  }
   return state;
 };
 export default filterReducer;
