@@ -19,8 +19,16 @@ const filterReducer = (state, action) => {
       grid_view: false,
     };
   }
+  if (action.type === "get_sort_value") {
+    let userSortValue = document.getElementById("sort");
+    let sortValue = userSortValue.options[userSortValue.selectedIndex].value;
+    console.log("Sort value:::", sortValue);
+    return {
+      ...state,
+      selected_sort_value: sortValue,
+    };
+  }
 
-  // set_list_view
   return state;
 };
 export default filterReducer;
