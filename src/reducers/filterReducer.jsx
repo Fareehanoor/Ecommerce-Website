@@ -13,6 +13,14 @@ const filterReducer = (state, action) => {
       grid_view: true,
     };
   }
+  if (action.type === "set_list_view") {
+    return {
+      ...state,
+      grid_view: false,
+    };
+  }
+
+  // set_list_view
   return state;
 };
 export default filterReducer;
