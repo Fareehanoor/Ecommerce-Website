@@ -20,12 +20,40 @@ const filterReducer = (state, action) => {
     };
   }
   if (action.type === "get_sort_value") {
-    let userSortValue = document.getElementById("sort");
-    let sortValue = userSortValue.options[userSortValue.selectedIndex].value;
-    console.log("Sort value:::", sortValue);
     return {
       ...state,
-      selected_sort_value: sortValue,
+      selected_sort_value: action.payload,
+    };
+  }
+  if (action.type === "sorting_products") {
+    let newSortdata;
+
+    const { filter_products, selected_sort_value } = state;
+    let tempSortProduct = [...filter_products];
+
+    const sortingProducts = (a, b) => {
+      if (selected_sort_value === "lowest") {
+        return a.price - b.price;
+      }
+
+      if (selected_sort_value === "highest") {
+        return b.price - a.price;
+      }
+
+      if (selected_sort_value === "a-z") {
+        return a.name.localeCompare(b.name);
+      }
+
+      if (selected_sort_value === "z-a") {
+        return b.name.localeCompare(a.name);
+      }
+    };
+
+    newSortdata = tempSortProduct.sort(sortingProducts);
+
+    return {
+      ...state,
+      filter_products: newSortdata,
     };
   }
 

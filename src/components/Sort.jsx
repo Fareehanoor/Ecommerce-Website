@@ -36,7 +36,7 @@ const Sort = () => {
             name="sort"
             id="sort"
             className="sort-selection--style"
-            onClick={handleSorting}
+            onChange={handleSorting}
           >
             <option value="lowest">Price(Lowest)</option>
             <option value="#" disabled></option>

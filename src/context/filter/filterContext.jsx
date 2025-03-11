@@ -21,11 +21,14 @@ export const FilterContextProvider = ({ children }) => {
     return dispatch({ type: "set_list_view" });
   };
 
-  const handleSorting = () => {
-    return dispatch({ type: "get_sort_value" });
+  const handleSorting = (event) => {
+    const userSelectedvalue = event.target.value;
+    return dispatch({ type: "get_sort_value", payload: userSelectedvalue });
   };
 
-  useEffect(() => {}, [state.selected_sort_value]);
+  useEffect(() => {
+    dispatch({ type: "sorting_products" });
+  }, [state.selected_sort_value]);
 
   useEffect(() => {
     dispatch({ type: "load_filter_products", payload: products });
