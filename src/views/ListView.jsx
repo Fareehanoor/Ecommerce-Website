@@ -1,7 +1,37 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
+import FormatPrice from "../helpers/FormatPrice";
+import { NavLink } from "react-router-dom";
+import { Button } from "../components/Button";
 
-const ListView = () => {
-  return <Wrapper>ListView</Wrapper>;
+const ListView = ({ products }) => {
+  return (
+    <Wrapper className="section">
+      <div className="container grid">
+        {products.map((currElem) => {
+          const { id, name, image, price, description } = currElem;
+          return (
+            <div className="card grid grid-two-column" key={id}>
+              <figure className="">
+                <img src={image} alt={name} />
+              </figure>
+
+              <div className="card-data">
+                <h3>{name}</h3>
+                <p>
+                  <FormatPrice price={price} />
+                </p>
+                <p>{description.slice(0, 110)}...</p>
+                <NavLink to={`/singleproduct/${id}`} className="btn-main">
+                  <Button className="btn">Read More</Button>
+                </NavLink>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Wrapper>
+  );
 };
 const Wrapper = styled.section`
   padding: 9rem 0;
