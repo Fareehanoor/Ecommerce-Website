@@ -57,6 +57,40 @@ const filterReducer = (state, action) => {
     };
   }
 
+  // if (action.type === "update_filter_value") {
+  //   const { name, value } = action.payload;
+  //   return {
+  //     ...state,
+  //     search_filter: { ...state.search_filter },
+  //     [name]: value,
+  //   };
+  // }
+  if (action.type === "update_filter_value") {
+    const { name, value } = action.payload;
+    return {
+      ...state,
+      search_filter: {
+        ...state.search_filter,
+        [name]: value,
+      },
+    };
+  }
+  if (action.type === "filter_products") {
+    let { all_products } = state;
+    let tempFilterProducts = [...all_products];
+
+    const { text } = state.search_filter;
+    if (text) {
+      tempFilterProducts = tempFilterProducts.filter((currElement) => {
+        return currElement.name.toLowerCase().includes(text);
+      });
+    }
+
+    return {
+      ...state,
+      filter_products: tempFilterProducts,
+    };
+  }
   return state;
 };
 export default filterReducer;
