@@ -4,8 +4,19 @@ import { useFilterContext } from "../context/filter/filterContext";
 const FilterSection = () => {
   const {
     search_filter: { text },
+    all_products,
     handleFilterUpdate,
   } = useFilterContext();
+
+  const getUniqueData = (data, property) => {
+    let newVal = data.map((currElement) => {
+      return currElement[property];
+    });
+    newVal = ["All", ...new Set(newVal)];
+    console.log(newVal);
+  };
+
+  const categoryData = getUniqueData(all_products, "category");
   return (
     <Wrapper>
       <div className="filter-search">
