@@ -10,6 +10,8 @@ const initialState = {
   selected_sort_value: "lowest",
   search_filter: {
     text: "",
+    category: "all",
+    company: "all",
   },
 };
 

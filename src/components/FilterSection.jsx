@@ -12,8 +12,7 @@ const FilterSection = () => {
     let newVal = data.map((currElement) => {
       return currElement[property];
     });
-    newVal = ["All", ...new Set(newVal)];
-    console.log(newVal);
+    return (newVal = ["all", ...new Set(newVal)]);
   };
 
   const categoryData = getUniqueData(all_products, "category");
@@ -29,6 +28,24 @@ const FilterSection = () => {
             onChange={handleFilterUpdate}
           />
         </form>
+      </div>
+      <div className="filter-category">
+        <h3>Category</h3>
+        <div>
+          {categoryData.map((currElement, index) => {
+            return (
+              <button
+                key={index}
+                type="button"
+                name="category"
+                value={currElement}
+                onClick={handleFilterUpdate}
+              >
+                {currElement}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </Wrapper>
   );
