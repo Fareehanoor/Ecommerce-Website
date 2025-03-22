@@ -13,15 +13,16 @@ const Products = () => {
         <div>
           <FilterSection />
         </div>
+
+        <section className="product-view--sort">
+          <div className="sort-filter">
+            <Sort />
+          </div>
+          <div className="main-product">
+            <ProductList />
+          </div>
+        </section>
       </div>
-      <section className="product-view--sort">
-        <div className="sort-filter">
-          <Sort />
-        </div>
-        <div className="main-product">
-          <ProductList />
-        </div>
-      </section>
     </Wrapper>
   );
 };
