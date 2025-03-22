@@ -3,7 +3,7 @@ import { useFilterContext } from "../context/filter/filterContext";
 
 const FilterSection = () => {
   const {
-    search_filter: { text },
+    search_filter: { text, colors },
     all_products,
     handleFilterUpdate,
   } = useFilterContext();
@@ -12,11 +12,23 @@ const FilterSection = () => {
     let newVal = data.map((currElement) => {
       return currElement[property];
     });
+    //method 1
+    // if (property === "colors") {
+    //   return (newVal = ["all", ...new Set([].concat(...newVal))]);
+    // } else {
+    //   return (newVal = ["all", ...new Set(newVal)]);
+    // }
+
+    //method 2 with .flat() --> covert multiple arrays into single and with unique values
+    if (property === "colors") {
+      newVal = newVal.flat();
+    }
     return (newVal = ["all", ...new Set(newVal)]);
   };
 
   const categoryData = getUniqueData(all_products, "category");
   const companyData = getUniqueData(all_products, "company");
+  const colorData = getUniqueData(all_products, "colors");
   return (
     <Wrapper>
       <div className="filter-search">
@@ -66,6 +78,26 @@ const FilterSection = () => {
             })}
           </select>
         </form>
+      </div>
+      <div className="filter-colors">
+        <h3>Colors</h3>
+        <div className="filter-color-style">
+          {colorData.map((currColor, index) => {
+            return (
+              <button
+                type="button"
+                value={currColor}
+                name="colors"
+                style={{ backgroundColor: currColor }}
+                className="btnStyle"
+                key={index}
+                onClick={handleFilterUpdate}
+              >
+                {colors === currColor ? "" : null}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </Wrapper>
   );
