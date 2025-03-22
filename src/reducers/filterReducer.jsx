@@ -57,14 +57,6 @@ const filterReducer = (state, action) => {
     };
   }
 
-  // if (action.type === "update_filter_value") {
-  //   const { name, value } = action.payload;
-  //   return {
-  //     ...state,
-  //     search_filter: { ...state.search_filter },
-  //     [name]: value,
-  //   };
-  // }
   if (action.type === "update_filter_value") {
     const { name, value } = action.payload;
     return {
@@ -79,7 +71,7 @@ const filterReducer = (state, action) => {
     let { all_products } = state;
     let tempFilterProducts = [...all_products];
 
-    const { text, category } = state.search_filter;
+    const { text, category, company } = state.search_filter;
     if (text) {
       tempFilterProducts = tempFilterProducts.filter((currElement) => {
         return currElement.name.toLowerCase().includes(text);
@@ -88,6 +80,11 @@ const filterReducer = (state, action) => {
     if (category !== "all") {
       tempFilterProducts = tempFilterProducts.filter(
         (currElement) => currElement.category === category
+      );
+    }
+    if (company !== "all") {
+      tempFilterProducts = tempFilterProducts.filter(
+        (currElement) => currElement.company === company
       );
     }
 

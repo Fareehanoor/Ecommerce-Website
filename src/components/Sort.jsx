@@ -11,7 +11,7 @@ const Sort = () => {
     handleSorting,
   } = useFilterContext();
   return (
-    <Wrapper className="sort-section container">
+    <Wrapper className="sort-section">
       <div className="sorting-list--grid">
         <button
           className={grid_view ? "active sort-btn" : "sort-btn"}
