@@ -87,7 +87,7 @@ const filterReducer = (state, action) => {
         (currElement) => currElement.company === company
       );
     }
-    if (colors) {
+    if (colors !== "all") {
       tempFilterProducts = tempFilterProducts.filter((currElement) =>
         currElement.colors.includes(colors)
       );
