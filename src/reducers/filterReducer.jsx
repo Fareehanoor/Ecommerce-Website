@@ -1,10 +1,18 @@
 const filterReducer = (state, action) => {
   if (action.type === "load_filter_products") {
+    let priceArr = action.payload.map((curElem) => curElem.price);
+    let maxPrice = Math.max(...priceArr);
+    let minPrice = Math.min(...priceArr);
+
+    console.log("maxPrice::::", maxPrice);
+    console.log("minPrice::::", minPrice);
+
     return {
       ...state,
       filter_products: [...action.payload],
       //   [...action.payload] means use copy of orignail data
       all_products: [...action.payload],
+      filters: { ...state.filters, maxPrice, minPrice, price: maxPrice },
     };
   }
   if (action.type === "set_grid_view") {
@@ -59,10 +67,12 @@ const filterReducer = (state, action) => {
 
   if (action.type === "update_filter_value") {
     const { name, value } = action.payload;
+
+    console.log("Reducer Update:", name, value);
     return {
       ...state,
-      search_filter: {
-        ...state.search_filter,
+      filters: {
+        ...state.filters,
         [name]: value,
       },
     };
@@ -71,7 +81,7 @@ const filterReducer = (state, action) => {
     let { all_products } = state;
     let tempFilterProducts = [...all_products];
 
-    const { text, category, company, colors } = state.search_filter;
+    const { text, category, company, colors, price } = state.filters;
     if (text) {
       tempFilterProducts = tempFilterProducts.filter((currElement) => {
         return currElement.name.toLowerCase().includes(text);
@@ -92,12 +102,27 @@ const filterReducer = (state, action) => {
         currElement.colors.includes(colors)
       );
     }
+    // if (price) {
+    //   tempFilterProducts = tempFilterProducts.filter(
+    //     (currElement) => currElement.price <= price
+    //   );
+    // }
+    if (price === 0) {
+      tempFilterProducts = tempFilterProducts.filter(
+        (curElem) => curElem.price == price
+      );
+    } else {
+      tempFilterProducts = tempFilterProducts.filter(
+        (curElem) => curElem.price <= price
+      );
+    }
 
     return {
       ...state,
       filter_products: tempFilterProducts,
     };
   }
+
   return state;
 };
 export default filterReducer;

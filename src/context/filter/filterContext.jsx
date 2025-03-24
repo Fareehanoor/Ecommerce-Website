@@ -8,11 +8,14 @@ const initialState = {
   all_products: [],
   grid_view: true,
   selected_sort_value: "lowest",
-  search_filter: {
+  filters: {
     text: "",
     category: "all",
     company: "all",
     colors: "all",
+    maxPrice: 0,
+    price: 0,
+    minPrice: 0,
   },
 };
 
@@ -36,17 +39,29 @@ export const FilterContextProvider = ({ children }) => {
     let name = event.target.name;
     let value = event.target.value;
 
-    return dispatch({ type: "update_filter_value", payload: { name, value } });
+    if (name === "price") {
+      value = Number(value); // Ensure price is a number
+    }
+
+    console.log("handleFilterUpdate Triggered:", name, value); // Debugging log
+
+    dispatch({ type: "update_filter_value", payload: { name, value } });
   };
 
   useEffect(() => {
     dispatch({ type: "filter_products" });
     dispatch({ type: "sorting_products" });
-  }, [state.selected_sort_value, state.search_filter]);
+  }, [state.selected_sort_value, state.filters]);
 
   useEffect(() => {
-    dispatch({ type: "load_filter_products", payload: products });
+    if (products.length > 0) {
+      console.log("Products Loaded:", products);
+      dispatch({ type: "load_filter_products", payload: products });
+    } else {
+      console.warn("No products available when loading filter products.");
+    }
   }, [products]);
+
   return (
     <FilterContext.Provider
       value={{
