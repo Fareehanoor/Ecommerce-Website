@@ -102,11 +102,7 @@ const filterReducer = (state, action) => {
         currElement.colors.includes(colors)
       );
     }
-    // if (price) {
-    //   tempFilterProducts = tempFilterProducts.filter(
-    //     (currElement) => currElement.price <= price
-    //   );
-    // }
+
     if (price === 0) {
       tempFilterProducts = tempFilterProducts.filter(
         (curElem) => curElem.price == price
