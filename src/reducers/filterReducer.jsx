@@ -118,7 +118,21 @@ const filterReducer = (state, action) => {
       filter_products: tempFilterProducts,
     };
   }
-
+  if (action.type === "clear_filter") {
+    return {
+      ...state,
+      filters: {
+        ...state.filters,
+        text: "",
+        category: "all",
+        company: "all",
+        colors: "all",
+        maxPrice: 0,
+        price: state.filters.maxPrice,
+        minPrice: state.filters.maxPrice,
+      },
+    };
+  }
   return state;
 };
 export default filterReducer;
