@@ -5,11 +5,13 @@ import { FaCheck } from "react-icons/fa";
 import AmountCart from "./AmountCart";
 import { NavLink } from "react-router-dom";
 import { Button } from "./Button";
+import { useCartContext } from "../context/cart/cartContext";
 
 /* eslint-disable react/prop-types */
 const AddToCart = ({ product }) => {
+  const { addToCart } = useCartContext();
   const { id, colors, stock } = product;
-  const [btnColor, setBtnColor] = useState(colors[0]);
+  const [color, setColor] = useState(colors[0]);
   const [amount, setAmount] = useState(1);
 
   const setDecrement = () => {
@@ -29,12 +31,10 @@ const AddToCart = ({ product }) => {
               <button
                 key={index}
                 style={{ backgroundColor: currColor }}
-                className={
-                  btnColor === currColor ? "btnStyle active" : "btnStyle"
-                }
-                onClick={() => setBtnColor(currColor)}
+                className={color === currColor ? "btnStyle active" : "btnStyle"}
+                onClick={() => setColor(currColor)}
               >
-                {btnColor === currColor ? (
+                {color === currColor ? (
                   <FaCheck className="checkStyle" />
                 ) : null}
               </button>
@@ -48,7 +48,7 @@ const AddToCart = ({ product }) => {
         decrement={setDecrement}
         increment={setIncrement}
       />
-      <NavLink to="/cart">
+      <NavLink to="/cart" onClick={() => addToCart(id, color, amount, product)}>
         <Button className="btn">Add to Cart</Button>
       </NavLink>
     </Wrapper>
