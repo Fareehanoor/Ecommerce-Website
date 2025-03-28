@@ -1,11 +1,21 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import reducer from "../../reducers/cartReducer";
 
 const CartContext = createContext();
 
+const getLocalCartData = () => {
+  let localStorageCartData = localStorage.getItem("FareehaCart::");
+  if (localStorageCartData == []) {
+    return [];
+  } else {
+    return JSON.parse(localStorageCartData);
+  }
+};
+
 const initialState = {
-  cart: [],
+  // cart: [],
+  cart: getLocalCartData(),
   total_item: "",
   total_amount: "",
   shipping_fee: 5000,
@@ -20,6 +30,10 @@ const CartProvider = ({ children }) => {
   const handleRemoveItem = (id) => {
     dispatch({ type: "remove_item", payload: id });
   };
+
+  useEffect(() => {
+    localStorage.setItem("FareehaCart::", JSON.stringify(state.cart));
+  }, [state.cart]);
   return (
     <CartContext.Provider value={{ ...state, addToCart, handleRemoveItem }}>
       {children}
