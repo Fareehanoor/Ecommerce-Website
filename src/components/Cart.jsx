@@ -12,7 +12,7 @@ const Cart = () => {
   if (cart.length === 0) {
     return (
       <EmptyDiv>
-        <h3>No Cart in Your Item now </h3>
+        <h3>No Item in Your Cart now </h3>
       </EmptyDiv>
     );
   }
