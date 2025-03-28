@@ -30,12 +30,17 @@ const CartProvider = ({ children }) => {
   const handleRemoveItem = (id) => {
     dispatch({ type: "remove_item", payload: id });
   };
+  const handleClearCart = () => {
+    dispatch({ type: "clear_cart" });
+  };
 
   useEffect(() => {
     localStorage.setItem("FareehaCart::", JSON.stringify(state.cart));
   }, [state.cart]);
   return (
-    <CartContext.Provider value={{ ...state, addToCart, handleRemoveItem }}>
+    <CartContext.Provider
+      value={{ ...state, addToCart, handleRemoveItem, handleClearCart }}
+    >
       {children}
     </CartContext.Provider>
   );
