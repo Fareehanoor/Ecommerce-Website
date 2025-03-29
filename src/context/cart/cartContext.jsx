@@ -34,12 +34,27 @@ const CartProvider = ({ children }) => {
     dispatch({ type: "clear_cart" });
   };
 
+  const setDecrement = (id) => {
+    dispatch({ type: "set_decrement", payload: id });
+  };
+
+  const setIncrement = (id) => {
+    dispatch({ type: "set_increment", payload: id });
+  };
+
   useEffect(() => {
     localStorage.setItem("FareehaCart::", JSON.stringify(state.cart));
   }, [state.cart]);
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, handleRemoveItem, handleClearCart }}
+      value={{
+        ...state,
+        addToCart,
+        handleRemoveItem,
+        handleClearCart,
+        setDecrement,
+        setIncrement,
+      }}
     >
       {children}
     </CartContext.Provider>
