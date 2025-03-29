@@ -3,20 +3,45 @@ const cartReducer = (state, action) => {
     let { id, color, amount, product } = action.payload;
     console.log("cartReducer::", id, color, amount, product);
 
-    let cartProduct;
-    cartProduct = {
-      id: id + color,
-      name: product.name,
-      amount,
-      color,
-      image: product.image[0].url,
-      price: product.price,
-      max: product.stock,
-    };
-    return {
-      ...state,
-      cart: [...state.cart, cartProduct],
-    };
+    let existingProduct = state.cart.find(
+      (currItem) => currItem.id == id + color
+    );
+
+    if (existingProduct) {
+      let updatedProduct = state.cart.map((currElem) => {
+        if (currElem.id == id + color) {
+          let newAmount = currElem.amount + amount;
+          if (newAmount >= currElem.max) {
+            newAmount = currElem.max;
+          }
+          return {
+            ...currElem,
+            amount: newAmount,
+          };
+        } else {
+          return currElem;
+        }
+      });
+      return {
+        ...state,
+        cart: updatedProduct,
+      };
+    } else {
+      let cartProduct;
+      cartProduct = {
+        id: id + color,
+        name: product.name,
+        amount,
+        color,
+        image: product.image[0].url,
+        price: product.price,
+        max: product.stock,
+      };
+      return {
+        ...state,
+        cart: [...state.cart, cartProduct],
+      };
+    }
   }
 
   if (action.type === "remove_item") {
