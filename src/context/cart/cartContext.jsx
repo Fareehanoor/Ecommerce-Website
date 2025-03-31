@@ -44,6 +44,7 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     dispatch({ type: "cart_items_count" });
+    dispatch({ type: "cart_total_price" });
     localStorage.setItem("FareehaCart::", JSON.stringify(state.cart));
   }, [state.cart]);
   return (
