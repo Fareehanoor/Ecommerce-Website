@@ -105,6 +105,17 @@ const cartReducer = (state, action) => {
       cart: updatedProduct,
     };
   }
+  if (action.type === "cart_items_count") {
+    let updatedValue = state.cart.reduce((initailVal, currElem) => {
+      let { amount } = currElem;
+      initailVal = initailVal + amount;
+      return initailVal;
+    }, 0);
+    return {
+      ...state,
+      total_item: updatedValue,
+    };
+  }
   return state;
 };
 

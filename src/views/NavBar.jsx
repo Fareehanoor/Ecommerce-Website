@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { IoCartOutline } from "react-icons/io5";
 import { CgClose, CgMenu } from "react-icons/cg";
 import { useState } from "react";
+import { useCartContext } from "../context/cart/cartContext";
 
 const NavBar = () => {
   const [menuIcon, setMenuIcon] = useState(false);
+  const { total_item } = useCartContext();
   return (
     <>
       <Nav>
@@ -54,7 +56,7 @@ const NavBar = () => {
                 onClick={() => setMenuIcon(false)}
               >
                 <IoCartOutline className="cart-trolley" />
-                <span className="cart-total--item">10</span>
+                <span className="cart-total--item">{total_item}</span>
               </NavLink>
             </li>
           </ul>
